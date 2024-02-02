@@ -1,0 +1,8 @@
+// ****1) "dev": "nodemon index" - for working of the nodemon inside the package.json {NOW WE NEED TO TYPE IN CONSOLE "npm run dev"}
+// 2) node index.js -TO STRAT SERVER 
+// 3) ctrl+c to close the server
+
+
+// FOLDER STRUCTURE 
+
+// 1) config folder -> debugger.js for connecting to mongodb
