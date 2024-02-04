@@ -2,14 +2,24 @@ const UserServices = require('../services/user.services');
 
 exports.register = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body; 
 
-        const successRes = await UserServices.registerUser({ email, password });
+        const existingUser = await UserServices.findOne({ email });
 
-        res.json({
-            status: true, success: "user register successfully"
-        });
+        if (existingUser) {
+            return res.status(400).json({
+                status: false,
+                error: "User with this email already exists."
+            });
+        } else {
+            await UserServices.registerUser({ email, password });
+            
+            res.json({
+                status: true,
+                success: "User registered successfully."
+            });
+        }
     } catch (error) {
-        throw error;
+        next(error); // Pass the error to the next middleware or error handler
     }
-}
+};
